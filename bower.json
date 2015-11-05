@@ -1,0 +1,22 @@
+{
+  "name": "polymer-weatherApp",
+  "homepage": "https://github.com/eumendoza/polymer-WeatherApp",
+  "authors": [
+    "Eugenio Mendoza <eu.mendoza@gmail.com>"
+  ],
+  "description": "Weather App developed with Polymer",
+  "main": "index.html",
+  "moduleType": [],
+  "keywords": [
+    "polymer",
+    "web-components",
+    "app",
+    "weather",
+    "javascript"
+  ],
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "polymer": "~1.2.1"
+  }
+}
