@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+  		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Polymer WeatherApp</title>
+		<!-- Polymer files -->
+		<script src="bower_components/webcomponentsjs/webcomponents.js"></script>
+		<link rel="import" href="bower_components/polymer/polymer.html">
+		<!-- Elements -->
+		<link rel="import" href="components/elements.html">
+
+	</head>
+	<body unresolved class="fullbleed layout vertical">
+		<template is="dom-bind" id="app">
+			<paper-drawer-panel id="paperDrawerPanel">
+				<paper-header-panel drawer>
+					<paper-toolbar>
+						<span>Menu</span>
+					</paper-toolbar>
+				</paper-header-panel>
+				<paper-header-panel main id="paperHeaderPanelMain">
+					<paper-toolbar>
+						<paper-icon-button icon="menu" paper-drawer-toggle></paper-icon-button>
+						<div class="title">Weather App</div>
+					</paper-toolbar>
+					<div class="content">
+					</div>
+				</paper-header-panel>
+			</paper-drawer-panel>
+		</template>
+		<script src="scripts/app.js"></script>
+	</body>
+</html>
