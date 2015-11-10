@@ -23,6 +23,7 @@
     "paper-toolbar": "PolymerElements/paper-toolbar#~1.0.4",
     "paper-icon-button": "PolymerElements/paper-icon-button#~1.0.5",
     "iron-ajax": "PolymerElements/iron-ajax#~1.0.8",
-    "polymer-efilters": "~0.3.2"
+    "polymer-efilters": "~0.3.2",
+    "weather-icons": "~2.0.10"
   }
 }
