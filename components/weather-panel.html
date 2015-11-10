@@ -16,7 +16,7 @@
 		    handle-as="json"
 		    on-response="getCityForecastData"></iron-ajax>
 
-		<weather-panel-header></weather-panel-header>
+		<weather-panel-header currentcity="{{weatherHeaderData}}"></weather-panel-header>
 	</template>
 
 </dom-module>
@@ -38,29 +38,26 @@
 			language: {
 				type: String,
 				value: 'es'
-			}
+			},
+			weatherHeaderData: Object
 		},
 		ready: function(){
 
 		},
 		getCityCurrentData: function(event){
 			var response = event.detail.response;
-			var parseData = parseCurrentData(response);
+			this.weatherHeaderData = this.parseCurrentData(response);
 		},
 		getCityForecastData: function(event){
 			var response = event.detail.response;
 			console.log(response);
 		},
 		parseCurrentData: function(response){
-			var parseData = {};
-			ciudad:
-			temperatura:
-			humedad:
-			viento:
-			icono:
-			descripcion:
-			+
-
+			var parseData = {
+				ciudad: response.name,
+				temperatura: response.main.temp,
+				descripcion: response.weather[0].description
+			};
 			return parseData;
 		}
 	});
