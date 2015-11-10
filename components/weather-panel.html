@@ -1,0 +1,64 @@
+<link rel="import" href="weather-panel-header.html">
+
+<dom-module is="weather-panel">
+	<template>
+		<style>
+		</style>
+
+		<iron-ajax
+		    auto
+		    url="http://api.openweathermap.org/data/2.5/weather?q=[[city]]&appid=[[APIKEY]]&lang=[[language]]&units=metric"
+		    handle-as="json"
+		    on-response="getCityCurrentData"></iron-ajax>
+		<iron-ajax
+		    auto
+		    url="http://api.openweathermap.org/data/2.5/forecast/daily?q=[[city]]&appid=[[APIKEY]]&lang=[[language]]&units=metric"
+		    handle-as="json"
+		    on-response="getCityForecastData"></iron-ajax>
+
+		<weather-panel-header currentcity="{{weatherHeaderData}}"></weather-panel-header>
+	</template>
+
+</dom-module>
+<script>
+
+	'use-strict';
+
+	Polymer({
+		is: 'weather-panel',
+		properties: {
+			APIKEY: {
+				type: String,
+				value: '5f7642460aa91226795391c8b3277dd0'
+			},
+			city: {
+				type: String,
+				value: 'Madrid'
+			},
+			language: {
+				type: String,
+				value: 'es'
+			},
+			weatherHeaderData: Object
+		},
+		ready: function(){
+
+		},
+		getCityCurrentData: function(event){
+			var response = event.detail.response;
+			this.weatherHeaderData = this.parseCurrentData(response);
+		},
+		getCityForecastData: function(event){
+			var response = event.detail.response;
+			console.log(response);
+		},
+		parseCurrentData: function(response){
+			var parseData = {
+				ciudad: response.name,
+				temperatura: response.main.temp,
+				descripcion: response.weather[0].description
+			};
+			return parseData;
+		}
+	});
+</script>

@@ -1,0 +1,63 @@
+<dom-module is="weather-panel-header">
+	<template>
+		<style is="custom-style">
+		:host{
+			width:100%;
+			height: 40%;
+			font-family: 'Roboto', 'Noto', sans-serif;
+			padding-top: 30px;
+		}
+		.container-main{
+			padding-top: 30px;
+		}
+		.container-main .cm-format{
+			width: 100%;
+			float: left;
+			margin: 0 auto;
+			text-align: center;
+		}
+		.title{
+			font-size: 24px;
+			font-weight: bolder;
+		}
+		.description {
+			font-size: 16px;
+		}
+		.temperature{
+			padding: 10px 0;
+			font-size: 112px;
+			font-weight: lighter;
+		}
+		.temperature .symbol {
+			font-size: 56px;
+			font-weight: lighter;
+		}
+		</style>
+
+		<div class="container">
+			<div class="container-main">
+				<span class="title cm-format">{{ currentcity.ciudad }}</span>
+				<span class="description cm-format">{{ _capitalize(currentcity.descripcion) }}</span>
+				<span class="temperature cm-format">{{ _round(currentcity.temperatura) }}<sup class="symbol">º</sup></span>
+			</div>			
+		</div>
+		
+	</template>
+</dom-module>
+<script>
+
+	'use-strict';
+
+	Polymer({
+		is: 'weather-panel-header',
+		properties: {
+			currentcity: Object
+		},
+		ready: function(){
+
+		},
+		_capitalize: PolymerFilters._capitalize,
+		_round: PolymerFilters._round
+	});
+
+</script>
