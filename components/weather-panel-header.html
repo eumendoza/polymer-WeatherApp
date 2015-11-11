@@ -7,10 +7,20 @@
 			padding-top: 30px;
 		}
 		.container{
-			height: 240px;
+			width: 100%;
+			height: 100%;
+			float: left;
+			border-bottom: 1px solid #ccc;
 		}
 		.container-main{
 			padding-top: 30px;
+			float:left;
+			width: 100%;
+		}
+		.container-meta{
+			width: 100%;
+			float: left;
+			padding: 0px 10px 5px 10px;
 		}
 		.container-main .cm-format{
 			width: 100%;
@@ -21,18 +31,27 @@
 		.title{
 			font-size: 24px;
 			font-weight: bolder;
+			float:left;
+			width:100%;
 		}
 		.description {
 			font-size: 16px;
+			float: left;
+			width: 100%;
 		}
 		.temperature{
 			padding: 10px 0;
 			font-size: 112px;
 			font-weight: lighter;
+			float: left;
+			width: 100%;
 		}
 		.temperature .symbol {
 			font-size: 56px;
 			font-weight: lighter;
+		}
+		#diaActual {
+			font-weight: bolder;
 		}
 		</style>
 
@@ -41,6 +60,9 @@
 				<span class="title cm-format">{{ currentcity.ciudad }}</span>
 				<span class="description cm-format">{{ _capitalize(currentcity.descripcion) }}</span>
 				<span class="temperature cm-format">{{ _round(currentcity.temperatura) }}<sup class="symbol">º</sup></span>
+			</div>
+			<div class="container-meta">
+				<span id="diaActual"></span> Hoy
 			</div>			
 		</div>
 		
@@ -56,7 +78,9 @@
 			currentcity: Object
 		},
 		ready: function(){
-
+			var diasSemana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+			var dia = new Date();
+			this.$.diaActual.innerHTML = diasSemana[dia.getDay()];
 		},
 		_capitalize: PolymerFilters._capitalize,
 		_round: PolymerFilters._round
