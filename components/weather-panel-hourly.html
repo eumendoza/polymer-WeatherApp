@@ -4,19 +4,19 @@
 	<template>
 		<style is="custom-style">
 			:host{
-				width:auto;
 				font-family: 'Roboto', 'Noto', sans-serif;
 				overflow-y:hidden;
 			}
 			.container-list{
 				height: 80px;
 				padding-top: 9px;
-				border-top: 1px solid #ccc;
+				width: 100%;
+				float: left;
 				border-bottom: 1px solid #ccc;
 			}
 
 		</style>
-
+		
 		<div class="container-list">
 			<template is="dom-repeat" items="{{ _limitTo(currentday, 9) }}">
 				<hour-item class="list-item" currentitem="{{item}}"></hour-item>
