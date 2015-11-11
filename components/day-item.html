@@ -1,0 +1,66 @@
+<dom-module is="day-item">
+	<template>
+		<style is="custom-style">
+			:host{
+				width:100%;
+				float:left;
+				padding: 5px 10px;
+				height:20px;
+			}
+			.diasemana{
+				float:left;
+				width:33.3%;
+			}
+			.temperatura{
+				float:left;
+				width:33.3%;
+				text-align: right;
+			}
+			.temp_max{
+				font-weight: bolder;
+				float: right;
+				text-align: left;
+			}
+			.temp_min{
+				padding-left: 10px;
+				padding-right: 20px;
+				float: right;
+				text-align: right;
+				width: 18px;
+			}
+			.icono{
+				width: 33.3%;
+				float: left;
+				text-align: center;
+			}
+		</style>
+
+		<paper-item>
+			<span class="diasemana">{{ currentday.dia }}</span>
+			<span id="iconodia" class="icono">{{ _parseIcono(currentday.icono) }}</span>
+			<span class="temperatura">
+				<span class="temp_min">{{ _round(currentday.temp_min) }}</span>
+				<span class="temp_max">{{ _round(currentday.temp_max) }}</span>
+			</span>
+		</paper-item>
+		
+	</template>
+</dom-module>
+<script>
+
+	'use-strict';
+
+	Polymer({
+		is: 'day-item',
+		properties: {
+			currentday: Object
+		},
+		ready: function(){
+		},
+		_round: PolymerFilters._round,
+		_parseIcono: function(icono){
+			this.$.iconodia.innerHTML = '<i class="wi wi-owm-'+icono+'"></i>';
+		}
+	});
+
+</script>

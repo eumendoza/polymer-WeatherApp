@@ -1,0 +1,41 @@
+<link rel="import" href="day-item.html">
+
+<dom-module is="weather-panel-week">
+	<template>
+		<style is="custom-style">
+			:host{
+				font-family: 'Roboto', 'Noto', sans-serif;
+			}
+			.container-list{
+				padding-top: 5px;
+				padding-bottom: 5px;
+				border-bottom: 1px solid #ccc;
+				height: 100%;
+				float:left;
+				width: 100%;
+			}
+		</style>
+
+		<div class="container-list">
+			<template is="dom-repeat" items="{{ _limitFrom(currentweek,1,9) }}">
+				<day-item currentday="{{item}}"></day-item>
+			</template>
+		</div>
+		
+	</template>
+</dom-module>
+<script>
+
+	'use-strict';
+
+	Polymer({
+		is: 'weather-panel-week',
+		properties: {
+			currentweek: Object
+		},
+		ready: function(){
+		},
+		_limitFrom: PolymerFilters._limitFrom
+	});
+
+</script>
