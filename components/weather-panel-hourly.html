@@ -1,0 +1,42 @@
+<link rel="import" href="hour-item.html">
+
+<dom-module is="weather-panel-hourly">
+	<template>
+		<style is="custom-style">
+			:host{
+				width:auto;
+				font-family: 'Roboto', 'Noto', sans-serif;
+				overflow-y:hidden;
+			}
+			.container-list{
+				height: 80px;
+				padding-top: 9px;
+				border-top: 1px solid #ccc;
+				border-bottom: 1px solid #ccc;
+			}
+
+		</style>
+
+		<div class="container-list">
+			<template is="dom-repeat" items="{{ _limitTo(currentday, 9) }}">
+				<hour-item class="list-item" currentitem="{{item}}"></hour-item>
+			</template>
+		</div>
+		
+	</template>
+</dom-module>
+<script>
+
+	'use-strict';
+
+	Polymer({
+		is: 'weather-panel-hourly',
+		properties: {
+			currentday: Object
+		},
+		ready: function(){
+		},
+		_limitTo: PolymerFilters._limitTo
+	});
+
+</script>
