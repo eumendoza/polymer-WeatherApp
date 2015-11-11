@@ -29,9 +29,8 @@
 		<paper-item>
 
 			<span class="custom-row hour">{{ _date(currentitem.hora, 'HH') }}</span>
-			<span class="custom-row"><i class="wi wi-owm-800"></i></span>
+			<span id="icono" class="custom-row">{{ _parseIcono(currentitem.icono) }}</span>
 			<span class="custom-row temperature">{{ _round(currentitem.temperatura) }}<sup>º</sup></span>
-
 
 		</paper-item>
 		
@@ -44,15 +43,15 @@
 	Polymer({
 		is: 'hour-item',
 		properties: {
-			hora: String,
-			icono: String,
-			temperatura: Number
+			currentitem: Object
 		},
 		ready: function(){
-
 		},
 		_round: PolymerFilters._round,
-		_date: PolymerFilters._date
+		_date: PolymerFilters._date,
+		_parseIcono: function(icono){
+			this.$.icono.innerHTML = '<i class="wi wi-owm-'+icono+'"></i>';
+		}
 	});
 
 </script>

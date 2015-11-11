@@ -3,12 +3,18 @@
 <dom-module is="weather-panel-hourly">
 	<template>
 		<style is="custom-style">
-		:host{
-			width:auto;
-			font-family: 'Roboto', 'Noto', sans-serif;
-			height:80px;
-			overflow-y:hidden;
-		}
+			:host{
+				width:auto;
+				font-family: 'Roboto', 'Noto', sans-serif;
+				overflow-y:hidden;
+			}
+			.container-list{
+				height: 80px;
+				padding-top: 9px;
+				border-top: 1px solid #ccc;
+				border-bottom: 1px solid #ccc;
+			}
+
 		</style>
 
 		<div class="container-list">
