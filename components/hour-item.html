@@ -29,7 +29,7 @@
 		<paper-item>
 
 			<span class="custom-row hour">{{ _date(currentitem.hora, 'HH') }}</span>
-			<span id="icono" class="custom-row">{{ _parseIcono(currentitem.icono) }}</span>
+			<span id="icono" class="custom-row">{{ _parseIcono(currentitem.icono, currentitem.hora) }}</span>
 			<span class="custom-row temperature">{{ _round(currentitem.temperatura) }}<sup>º</sup></span>
 
 		</paper-item>
@@ -49,8 +49,16 @@
 		},
 		_round: PolymerFilters._round,
 		_date: PolymerFilters._date,
-		_parseIcono: function(icono){
-			this.$.icono.innerHTML = '<i class="wi wi-owm-'+icono+'"></i>';
+		_parseIcono: function(icono, hora){
+			var dia = this.checkDiaNoche(hora);
+			this.$.icono.innerHTML = '<i class="wi wi-owm-'+dia+'-'+icono+'"></i>';
+		},
+		checkDiaNoche: function(hora){
+			var panel = document.querySelector('weather-panel');
+			var amanecer = this._date(panel.sunrise,'HH');
+			var anochecer = this._date(panel.sunset,'HH');
+			var hora = this._date(hora,'HH');
+			return ((hora<anochecer)&&(hora>amanecer)) ? 'day' : 'night';
 		}
 	});
 

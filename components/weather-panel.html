@@ -48,6 +48,8 @@
 				type: String,
 				value: 'es'
 			},
+			sunrise: String,
+			sunset: String,
 			weatherHeaderData: Object,
 			weatherDayData: Object,
 			weatherWeekData: Object
@@ -73,6 +75,8 @@
 				temperatura: response.main.temp,
 				descripcion: response.weather[0].description
 			};
+			this.sunrise = new Date(response.sys.sunrise*1000);
+			this.sunset = new Date(response.sys.sunset*1000);
 			return parseData;
 		},
 		parseDayForecastData: function(response){
