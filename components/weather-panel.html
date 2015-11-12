@@ -1,0 +1,116 @@
+<link rel="import" href="weather-panel-header.html">
+<link rel="import" href="weather-panel-hourly.html">
+<link rel="import" href="weather-panel-week.html">
+
+<dom-module is="weather-panel">
+	<template>
+		<style>
+		</style>
+		
+		<iron-ajax
+		    auto
+		    url="http://api.openweathermap.org/data/2.5/weather?q=[[city]]&appid=[[APIKEY]]&lang=[[language]]&units=metric"
+		    handle-as="json"
+		    on-response="getCityCurrentData"></iron-ajax>
+		<iron-ajax
+		    auto
+		    url="http://api.openweathermap.org/data/2.5/forecast?q=[[city]]&appid=[[APIKEY]]&lang=[[language]]&units=metric"
+		    handle-as="json"
+		    on-response="getCityDayForecastData"></iron-ajax>
+		<iron-ajax
+		    auto
+		    url="http://api.openweathermap.org/data/2.5/forecast/daily?q=[[city]]&appid=[[APIKEY]]&lang=[[language]]&units=metric&cnt=10"
+		    handle-as="json"
+		    on-response="getCityForecastData"></iron-ajax>
+
+		<weather-panel-header currentcity="{{ weatherHeaderData }}"></weather-panel-header>
+		<weather-panel-hourly currentday="{{ weatherDayData }}"></weather-panel-hourly>
+		<weather-panel-week currentweek="{{ weatherWeekData }}"></weather-panel-week>
+	</template>
+
+</dom-module>
+<script>
+
+	'use-strict';
+
+	Polymer({
+		is: 'weather-panel',
+		properties: {
+			APIKEY: {
+				type: String,
+				value: '5f7642460aa91226795391c8b3277dd0'
+			},
+			city: {
+				type: String,
+				value: 'Las Palmas de Gran Canaria'
+			},
+			language: {
+				type: String,
+				value: 'es'
+			},
+			sunrise: String,
+			sunset: String,
+			weatherHeaderData: Object,
+			weatherDayData: Object,
+			weatherWeekData: Object
+		},
+		ready: function(){
+
+		},
+		getCityCurrentData: function(event){
+			var response = event.detail.response;
+			this.weatherHeaderData = this.parseCurrentData(response);
+		},
+		getCityForecastData: function(event){
+			var response = event.detail.response;
+			this.weatherWeekData = this.parseWeekData(response);
+		},
+		getCityDayForecastData: function(event){
+			var response = event.detail.response;
+			this.weatherDayData = this.parseDayForecastData(response);
+		},
+		parseCurrentData: function(response){
+			var parseData = {
+				ciudad: response.name,
+				temperatura: response.main.temp,
+				descripcion: response.weather[0].description
+			};
+			this.sunrise = new Date(response.sys.sunrise*1000);
+			this.sunset = new Date(response.sys.sunset*1000);
+			return parseData;
+		},
+		parseDayForecastData: function(response){
+			var parseData = [];
+			var listData = response.list;
+
+			listData.forEach(function(item, index){
+				var itemParsed = {
+					hora: item.dt_txt,
+					temperatura: item.main.temp,
+					icono: item.weather[0].id
+				};
+				parseData[index] = itemParsed;
+			});
+
+			return parseData;
+		},
+		parseWeekData: function(response){
+			var parseData = [];
+			var listData = response.list;
+			var diasSemana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+
+			listData.forEach(function(item, index){
+				var diaParse = new Date(item.dt*1000);
+				var itemParsed = {
+					dia: diasSemana[diaParse.getDay()],
+					temp_max: item.temp.max,
+					temp_min: item.temp.min,
+					icono: item.weather[0].id
+				};
+				parseData[index] = itemParsed;
+			});
+
+			return parseData;
+		}
+	});
+</script>

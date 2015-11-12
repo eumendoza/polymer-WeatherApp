@@ -9,25 +9,27 @@
 		<link rel="import" href="bower_components/polymer/polymer.html">
 		<!-- Elements -->
 		<link rel="import" href="components/elements.html">
+		<link rel="stylesheet" type="text/css" href="bower_components/weather-icons/css/weather-icons.css">
 
 	</head>
 	<body unresolved class="fullbleed layout vertical">
 		<template is="dom-bind" id="app">
-			<paper-drawer-panel id="paperDrawerPanel">
-				<paper-header-panel drawer>
-					<paper-toolbar>
-						<span>Menu</span>
-					</paper-toolbar>
-				</paper-header-panel>
-				<paper-header-panel main id="paperHeaderPanelMain">
-					<paper-toolbar>
-						<paper-icon-button icon="menu" paper-drawer-toggle></paper-icon-button>
-						<div class="title">Weather App</div>
-					</paper-toolbar>
-					<div class="content">
-					</div>
-				</paper-header-panel>
-			</paper-drawer-panel>
+			<paper-header-panel id="paperHeaderPanelMain">
+				<paper-toolbar>
+					<div class="title">Weather App</div>
+					<paper-icon-button icon="search" data-dialog="eligeCiudad" on-click="openDialog"></paper-icon-button>
+				</paper-toolbar>
+				<div class="content">
+					<weather-panel city="{{currentcity}}"></weather-panel>
+				</div>
+			</paper-header-panel>
+
+			<paper-dialog id="eligeCiudad" modal>
+				<paper-input id="input-currentcity" label="Elige una ciudad"></paper-input>
+				<div class="buttons">
+		        	<paper-button dialog-confirm autofocus on-click="setCurrentCity">Buscar</paper-button>
+		      	</div>
+			</paper-dialog>
 		</template>
 		<script src="scripts/app.js"></script>
 	</body>

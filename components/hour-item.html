@@ -1,0 +1,65 @@
+<dom-module is="hour-item">
+	<template>
+		<style is="custom-style">
+		:host{
+			width: 11%;
+			height: 80px;
+			font-family: 'Roboto', 'Noto', sans-serif;
+			float: left;
+		}
+		.custom-row {
+			float: left;
+			text-align: center;
+			width: 100%;
+			height: 33%;
+		}
+		.hour{
+			font-size: 12px;
+		}
+		.temperature{
+			font-size: 16px;
+			font-weight: bolder;
+		}
+		.temperature sup{
+			font-size: 8px;
+			font-weight: bolder;
+		}
+		</style>
+
+		<paper-item>
+
+			<span class="custom-row hour">{{ _date(currentitem.hora, 'HH') }}</span>
+			<span id="icono" class="custom-row">{{ _parseIcono(currentitem.icono, currentitem.hora) }}</span>
+			<span class="custom-row temperature">{{ _round(currentitem.temperatura) }}<sup>º</sup></span>
+
+		</paper-item>
+		
+	</template>
+</dom-module>
+<script>
+
+	'use-strict';
+
+	Polymer({
+		is: 'hour-item',
+		properties: {
+			currentitem: Object
+		},
+		ready: function(){
+		},
+		_round: PolymerFilters._round,
+		_date: PolymerFilters._date,
+		_parseIcono: function(icono, hora){
+			var dia = this.checkDiaNoche(hora);
+			this.$.icono.innerHTML = '<i class="wi wi-owm-'+dia+'-'+icono+'"></i>';
+		},
+		checkDiaNoche: function(hora){
+			var panel = document.querySelector('weather-panel');
+			var amanecer = this._date(panel.sunrise,'HH');
+			var anochecer = this._date(panel.sunset,'HH');
+			var hora = this._date(hora,'HH');
+			return ((hora<anochecer)&&(hora>amanecer)) ? 'day' : 'night';
+		}
+	});
+
+</script>
