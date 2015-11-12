@@ -17,12 +17,19 @@
 			<paper-header-panel id="paperHeaderPanelMain">
 				<paper-toolbar>
 					<div class="title">Weather App</div>
-					<paper-icon-button icon="search"></paper-icon-button>
+					<paper-icon-button icon="search" data-dialog="eligeCiudad" on-click="openDialog"></paper-icon-button>
 				</paper-toolbar>
 				<div class="content">
-					<weather-panel></weather-panel>
+					<weather-panel city="{{currentcity}}"></weather-panel>
 				</div>
 			</paper-header-panel>
+
+			<paper-dialog id="eligeCiudad" modal>
+				<paper-input id="input-currentcity" label="Elige una ciudad"></paper-input>
+				<div class="buttons">
+		        	<paper-button dialog-confirm autofocus on-click="setCurrentCity">Buscar</paper-button>
+		      	</div>
+			</paper-dialog>
 		</template>
 		<script src="scripts/app.js"></script>
 	</body>
